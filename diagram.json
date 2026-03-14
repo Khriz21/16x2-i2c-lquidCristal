@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "author": "Cristian Juarez",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 67.8, "left": -0.6, "attrs": {} },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -118.4,
+      "left": 5.6,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-ky-040",
+      "id": "encoder1",
+      "top": -73.8,
+      "left": -161.9,
+      "rotate": 90,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "uno:5V", "lcd1:VCC", "red", [ "v9.5", "h-178.6", "v-345.7" ] ],
+    [ "uno:GND.2", "lcd1:GND", "black", [ "v19.1", "h-197.7", "v-364.8" ] ],
+    [ "uno:GND.3", "encoder1:GND", "black", [ "v38.3", "h-292.8" ] ],
+    [ "uno:5V", "encoder1:VCC", "red", [ "v28.7", "h-264.6" ] ],
+    [ "lcd1:SDA", "uno:A4", "green", [ "h-48", "v384.2", "h278.4" ] ],
+    [ "lcd1:SCL", "uno:A5", "green", [ "h-57.6", "v384.3", "h302.9" ] ],
+    [ "encoder1:SW", "uno:3", "limegreen", [ "v38.4", "h316.7" ] ],
+    [ "encoder1:DT", "uno:2", "gray", [ "v28.8", "h326.3" ] ],
+    [ "encoder1:CLK", "uno:4", "magenta", [ "v19.2", "h288" ] ]
+  ],
+  "dependencies": {}
+}
