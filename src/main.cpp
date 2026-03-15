@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include "Encoder.h"
+#include"Display.h"
+#include "Menu.h"
 #include "../../include/PinConfig.h"
 
 Encoder encoderHandler(EN_CLK, EN_DT, EN_SW);

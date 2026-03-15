@@ -1,19 +1,28 @@
 #include <Arduino.h>
-#include <MenuItem.h>
+#include "MenuItem.h"
 
 #ifndef MENU_H
 #define MENU_H
+#define  MAX_MENU_ITEMS 5
 class Menu
 {
 private:
-    const uint8_t MAX_MENU_ITEMS = 10;
     const char* title;
-
     MenuItem* items[MAX_MENU_ITEMS];
-    uint8_t itemCout;
+    uint8_t itemCount;
     uint8_t currentIndex;
+
 public:
-    // Menu(/* args */);
+    Menu(const char* title);
+
+    bool addItem(MenuItem* item);
+    void navigate(int32_t delta);
+    void selec();
+    const char* getTitle();
+    MenuItem* getCurrentItem();
+    MenuItem* getItem(uint8_t index);
+    uint8_t getItemCount();           
+    uint8_t getCurrentIndex(); 
 };
 
 #endif // Menu
