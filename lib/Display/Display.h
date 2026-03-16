@@ -20,6 +20,8 @@ public:
 
     void begin();
     void render(Menu &menu);
+    void setNeedsUpdate(bool needsUpdate) { _needsUpdate = needsUpdate; }
+    bool needsUpdate() const { return _needsUpdate; }
 };
 
 #endif

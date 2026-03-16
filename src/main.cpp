@@ -25,8 +25,6 @@ MenuItem exitItem("Exit", []() {
   Serial.println("Exit action executed");
 });
 
-int32_t counter=0;
-
 void setup() {
   Serial.begin(9600);
   encoderHandler.begin();
@@ -41,19 +39,18 @@ void setup() {
 }
 
 void loop() {
+  
+  if(display.needsUpdate()) display.render(menu);
 
-  display.render(menu);
-  
-  
   int32_t delta = encoderHandler.getDelta();
   if (delta != 0){
+    display.setNeedsUpdate(true);
     menu.navigate(delta);
-    counter+=delta;
-    Serial.println(counter);
   }
-
   
-  if (encoderHandler.wasClicked()) Serial.println("Clicked");
-  
+  if (encoderHandler.wasClicked()) {
+    menu.selec();
+    display.setNeedsUpdate(true);
+}
   
 }

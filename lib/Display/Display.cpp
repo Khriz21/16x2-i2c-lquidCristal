@@ -1,19 +1,21 @@
 #include "Display.h"
 
-Display::Display(LiquidCrystal_I2C &lcd) : _lcd(lcd), _firstVisible(0), _needsUpdate(true), _height(2), _width(16) {}
+Display::Display(LiquidCrystal_I2C &lcd) : _lcd(lcd), _firstVisible(0), _height(2), _width(16) {}
 void Display::begin()
 {
     _lcd.init();
     _lcd.backlight();
+    _needsUpdate = true;
 
     byte arrow[8] = {B00000,B00100,B00110,B11111,B00110,B00100,B00000,B00000};
+
     _lcd.createChar(0, arrow);
 }
 
 void Display::render(Menu &menu)
 {
-    
-    uint8_t current = menu.getCurrentIndex();// integer division to find the first visible item index
+    //? Get the index of the currently selected item
+    uint8_t current = menu.getCurrentIndex();
 
     //? adjust _firstVisible to ensure current item is visible
     if (current < _firstVisible)
@@ -23,7 +25,7 @@ void Display::render(Menu &menu)
     if(current >= _firstVisible + _height)
         _firstVisible = current - _height + 1;
 
-    //? clear display
+    //? Render visible items
     for (uint8_t i = 0; i < _height; i++)
     {
         _lcd.setCursor(0, i);
@@ -36,14 +38,14 @@ void Display::render(Menu &menu)
 
         String line = "";
         
-        //? draw arrow
+        //? draw arrow if this is the current item
         if (itemIdx == current)
         {
-            line += (char)0; // print arrow for current item
+            line += (char)0;
         }
         else
         {
-            line += " "; // otherwise print space 
+            line += " "; 
         }
 
         //? type-specific rendering
@@ -55,6 +57,7 @@ void Display::render(Menu &menu)
             break;
         case MenuItem::TOGGLE:
             line += (char *)item->getLabel();
+            line += ": ";     
             line += item->getState() ? " ON" : " OFF";
             break;
         case MenuItem::VALUE:
@@ -65,6 +68,7 @@ void Display::render(Menu &menu)
         }
         _lcd.print(line);
         // pad with spaces to clear any leftover characters from previous render
-        for(uint8_t j = line.length(); j < _width; j++) _lcd.print(" ");  
+        for(uint8_t j = line.length(); j < _width; j++) _lcd.print(" ");
     }
+    this->_needsUpdate = false;  
 }
