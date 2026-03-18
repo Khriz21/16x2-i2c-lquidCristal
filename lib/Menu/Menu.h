@@ -3,7 +3,7 @@
 
 #ifndef MENU_H
 #define MENU_H
-#define  MAX_MENU_ITEMS 5
+#define  MAX_MENU_ITEMS 6
 class Menu
 {
 private:
@@ -17,7 +17,7 @@ public:
 
     bool addItem(MenuItem* item);
     void navigate(int32_t delta);
-    void selec();
+    void select();
     const char* getTitle();
     MenuItem* getCurrentItem();
     MenuItem* getItem(uint8_t index);

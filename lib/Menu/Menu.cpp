@@ -25,7 +25,7 @@ void Menu::navigate(int32_t delta)
         this->currentIndex = (currentIndex + delta + this->itemCount)%this->itemCount;
 }
 
-void Menu::selec()
+void Menu::select()
 {
     if(this->itemCount == 0) return;
     MenuItem* selected = this->items[this->currentIndex];
@@ -41,7 +41,6 @@ void Menu::selec()
     case MenuItem::VALUE:
         selected->getValue();
         break;
-    
     default:
         break;
     }

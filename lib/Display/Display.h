@@ -20,8 +20,9 @@ public:
 
     void begin();
     void render(Menu &menu);
-    void setNeedsUpdate(bool needsUpdate) { _needsUpdate = needsUpdate; }
-    bool needsUpdate() const { return _needsUpdate; }
+    void mainDisplay(const char* TLabel, const char* mLavel, uint8_t setTemp, uint8_t curTemp, uint8_t setSpeed);
+    void setNeedsUpdate(bool needsUpdate);
+    bool needsUpdate();
 };
 
 #endif

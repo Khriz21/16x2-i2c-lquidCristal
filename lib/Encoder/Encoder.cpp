@@ -22,10 +22,9 @@ void Encoder::begin()
 
 void Encoder::isrMovement()
 {
-    unsigned long now = micros();
+    unsigned long now = millis();
 
-    if (now - instance->lastInterrupTime < 2000) return;
-
+    if (now - instance->lastInterrupTime < 150) return;
     bool clkState = digitalRead(instance->pinCLK);
 
     if (clkState == LOW)

@@ -6,11 +6,14 @@ void Display::begin()
     _lcd.init();
     _lcd.backlight();
     _needsUpdate = true;
-
+    
     byte arrow[8] = {B00000,B00100,B00110,B11111,B00110,B00100,B00000,B00000};
-
+    
     _lcd.createChar(0, arrow);
 }
+
+void Display::setNeedsUpdate(bool needsUpdate){this->_needsUpdate = needsUpdate;}
+bool Display::needsUpdate(){return this->_needsUpdate;}
 
 void Display::render(Menu &menu)
 {
@@ -72,3 +75,16 @@ void Display::render(Menu &menu)
     }
     this->_needsUpdate = false;  
 }
+
+void Display::mainDisplay(const char* TLabel, const char* mLavel, uint8_t setTemp, uint8_t curTemp, uint8_t setSpeed)
+{
+    char buffer[17];
+    snprintf(buffer, sizeof(buffer),"%s: %dC/%dC",TLabel, setTemp, curTemp);
+    _lcd.setCursor(0, 0);
+    _lcd.print(buffer);
+    snprintf(buffer, sizeof(buffer), "%s: %d%%",mLavel, setSpeed);
+    _lcd.setCursor(0, 1);
+    _lcd.print(buffer);
+    this->_needsUpdate = false;
+}
+

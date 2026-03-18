@@ -25,7 +25,7 @@ private:
 public:
     MenuItem(const char *label, MenuAction function);
     MenuItem(const char *label, bool toggleState, MenuAction function);
-    MenuItem(const char *label, int *valuePtr);
+    MenuItem(const char *label, int *valuePtr, MenuAction function);
 
     void execute();
     void setState(bool state);
