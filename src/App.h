@@ -42,7 +42,6 @@ private:
     static App *_instance;
 
     void handleUI();
-    void updateMotorState();
 
     static void onSetToggle();
     static void onSetUpdateValue();

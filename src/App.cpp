@@ -26,10 +26,8 @@ void App::handleUI()
         switch (_appMode)
         {
         case AppMode::HOME_SCREEN:
-            if (_encoder.wasClicked())
-            {
-                _appMode = AppMode::MAIN_MENU;
-            }
+            if (_encoder.wasClicked()) _appMode = AppMode::MAIN_MENU;
+            
             break;
         case AppMode::MAIN_MENU:
             _menu.navigate(delta);
